@@ -15,7 +15,8 @@
     
     color:white;
     background:rgb(34, 33, 33);
-   
+    position: relative;
+    z-index:1;
    /* position:sticky;
     top:0;*/
 }
@@ -70,10 +71,15 @@
    background-repeat: no-repeat;
    height:600px;
    background-size: 100%;
-
+   transition: all 1s ease;
    
    opacity:0.9;
    
+}
+.main-image:hover{
+  transform:scale(1.20);
+
+ 
 }
    
 
@@ -124,12 +130,17 @@ input{
    height: 40px;
    background: none;
    color:white;
- 
+   
 }
 input:hover{
     border-color: greenyellow;
     border:2px greenyellow solid;
 }
+::placeholder {
+  color: white;
+  opacity: 0.8;
+}
+
 
 /*to keep margin in main page form the sides of general and update boxes*/
 #inf{
@@ -262,8 +273,22 @@ margin-bottom: 2px;
   text-align: center
 }
 
-
-
+.buspic{
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  float:left;
+  padding:20px;
+  border:none;
+}
+.openBus{
+  width:350px;
+  height:250px;
+}
+.closeBus{
+  width:350px;
+  height:250px;
+}
 #footer{
  margin-top: 1342px;
  margin-bottom: 0;
@@ -350,6 +375,22 @@ opacity:0.8;
 }
 .weatherid:hover{
     color:green;
+}
+
+.center{
+  text-align: center;
+}
+
+.list1{
+  float:left;
+  padding: 20px;
+  margin:20px;
+ 
+}
+.list2{
+  padding: 20px;
+  margin:20px;
+  
 }
 /*  Chat 
 

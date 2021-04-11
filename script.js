@@ -1,5 +1,5 @@
 
-  
+  const artist=$("input").val();
 
   function ticketmaster(){
   
@@ -92,7 +92,10 @@ function ticketmasterbyartist (){    //function for artist search
 
         var titlecell=$("<td>");
         titlecell.append(response._embedded.events[i].name);
-        tablerow.append(titlecell);
+       tablerow.append(titlecell);
+
+  
+
 
        var yearcell=$("<td>");
        yearcell.append(response._embedded.events[i].dates.start.localDate);
@@ -102,11 +105,39 @@ function ticketmasterbyartist (){    //function for artist search
        hourcell.append(response._embedded.events[i].dates.start.localTime);
         tablerow.append(hourcell);
 
+
+        var location=$("<td>");
+        location.addClass("local");
+        location.append(response._embedded.events[i]._embedded.venues[0].name);
+        tablerow.append(location);
+
+    var weather=$("<a>");
+       weather.addClass("weather");
+       weather.attr("href","weather.html");
+       weather.text("check weather");
+       tablerow.append(weather); 
+
+
+   
+
        $("#byEvent").append(tablerow);
- };
-      
-      
-     console.log(response);
+       
+
+     
+       var image=$("<img>");
+       var imageUrl= image.append(response._embedded.events[i].images[0].url);
+           image.attr("src",imageUrl);
+       $("#byEvent").append(image);
+     
+        
+       localStorage.setItem("clientInput",artist);
+
+ }
+     // else {
+         // $("#byEvent").text("SORRY NO RESULTS ON THAT SEARCH VERIFIED ARTIST NAME AND TRY AGAIN");
+    //  }
+ 
+    // console.log(response._embedded.events[i].images[0].url);
       };
      
 });
@@ -132,16 +163,22 @@ function busType(){
   $("#list").empty();
   $("#contactinf").empty();
 var head1=$("<h1>").text("Open Roof Bus");
+var openbus=$("<img>").attr("src","https://images.unsplash.com/photo-1560456801-6abd80c6d87d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8YnVzc2VzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60");
+    openbus.addClass("openBus");
 var head2=$("<h1>").text("Close Roof Bus");
+var closeBus=$("<img>").attr("src","https://images.unsplash.com/photo-1560122861-fd86260dabb6?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzc2VzfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60");
 var openRoof=$("<div>").append(head1);
+    openRoof.append(openbus);
 openRoof.attr("id","openRoof");
 var closeRoof=$("<div>").append(head2);
+    closeRoof.append(closeBus);
+    closeBus.addClass("closeBus");
 closeRoof.attr("id","closeRoof");
 $("#center").append(openRoof);
 $("#center").append(closeRoof);
 
 
-}
+};
 
 function Book(){
   $(".main-image").remove();
@@ -150,9 +187,11 @@ function Book(){
   $("#list").empty();
   $("#contactinf").empty();
 
- var booktext= $("<p>").text("bus seat avialable");
+ var booktext= $("<p>").text("bus seat avialable ddjfjhfhjfhfhfhfh fhfhfhfhfhfhfhfhfh");
  $("#center").append(booktext);
-}
+};
+
+
 
 
 
@@ -177,6 +216,11 @@ $("button").click(function(){
    ticketmasterbyartist();
    $("#byEvent").show();
    $(".main-image").remove();
+  // var userSearch=$("input").val();
+  // var userid=$("#clientInput");
+  // var objectJson=JSON.stringify(userid);
+ //  localStorage.setItem('#clientInput',userSearch);
+
   });
 
 
@@ -193,41 +237,35 @@ $("button").click(function(){
   $("#byEvent").empty();
   $("#events").remove();
     Book();
- })
-  
-/*chat
-function openForm() {
-  $("#myForm").style.display = "block";
+ });
+
+$("#favorites").click(function(){
  
-}
 
-function closeForm() {
-  $("#myForm").style.display = "none";
-}
-//$("#map").click(function(){
+  $("#byEvent").empty();
+  $("#events").remove();
+  $("#inf").empty();
+  $("#list").empty();
+  
+  $("#byEvent").show();
+  $(".main-image").remove();
+
+var searchStoraged=localStorage.getItem("clientInput");
+
+  var mostSearched=$("<div>");
+ 
+     mostSearched.append(searchStoraged);
+
+  
+    $("#center").append( mostSearched);
+    
    
-//});
+});
 
- var queryURL ="https://api.openweathermap.org/data/2.5/forecast?q=miami&appid=166a433c57516f51dfab1f7edaed8413";
-   
-  //  var queryURL ="https://api.openweathermap.org/data/2.5/forecast?q=miami&appid=166a433c57516f51dfab1f7edaed8413";
-       //   $.ajax({
-         // url: queryURL,
-       //  method: "GET"
-         // }).then(function(response) {
-         // console.log(response);
-          //  var temperature=$("<p>").text( Math.floor(((response.list[6].main.temp -273.15) * 1.80 )+ 32)+" °F");
-             //  var  nextday=$("<h4>").append(moment().add(1,'days').format("dddd "));
-                  //  nextday.append(moment().add(1,'days').format("ll"));
-         
-           //  var temperature=( Math.floor(((response.list[6].main.temp -273.15) * 1.80 )+ 32)+" °F
+ 
 
 
-
-
-*/
-
-
+    
 
 
 
